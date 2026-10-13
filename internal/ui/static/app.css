@@ -1051,7 +1051,7 @@ a.live:hover { text-decoration: underline; }
 @media (max-width: 720px) { .goli-open span { display: none; } .goli { width: 100vw; border-left: 0; } }
 
 /* Ask Goli for a briefing on one upgrade. */
-.upgrade .brief { margin-left: 8px; font-size: 12.5px; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+.upgrade .brief, .ask-goli { margin-left: 8px; font-size: 12.5px; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
 /* Goli, the plushie: in the corner, in the header button and in the panel. In the corner it sways a little,
    waves when pointed at and follows the pointer with its eyes; it blinks now and then, raises its eyebrow and
    rings its release bell while it works on an answer, and dings once when done. It never pops up by itself. */
@@ -1094,3 +1094,4 @@ html.goli-done .goli-bell { animation: goli-ring 0.45s ease-in-out 3; }
 }
 @media (max-width: 720px) { .goli-fab { width: 46px; height: 60px; right: 12px; bottom: 12px; } }
 @media print { .goli-fab, .goli { display: none; } }
+.goli-copy { float: right; font-size: 12px; margin-left: 8px; }
