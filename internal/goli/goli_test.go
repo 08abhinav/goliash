@@ -226,3 +226,20 @@ func TestConfigFromEnv(t *testing.T) {
 		t.Error("accepted effort max")
 	}
 }
+
+func TestAllowTodayCeiling(t *testing.T) {
+	a, _ := newTest(t)
+	now := time.Date(2026, 10, 13, 23, 0, 0, 0, time.UTC)
+	if !a.AllowToday(now) {
+		t.Fatal("no ceiling refused")
+	}
+	a.cfg.PerDay = 2
+	a.today, a.day = 0, ""
+	got := []bool{a.AllowToday(now), a.AllowToday(now), a.AllowToday(now)}
+	if !got[0] || !got[1] || got[2] {
+		t.Errorf("ceiling of 2: %v", got)
+	}
+	if !a.AllowToday(now.Add(2 * time.Hour)) {
+		t.Error("refused the next day")
+	}
+}

@@ -70,6 +70,9 @@ spec:
               valueFrom:
                 secretKeyRef: { name: {{ .existingSecret }}, key: {{ .existingSecretKey }} }
             {{- end }}
+            {{- if .provider }}
+            - { name: GOLIASH_AI_PROVIDER, value: {{ .provider | quote }} }
+            {{- end }}
             {{- if .model }}
             - { name: GOLIASH_AI_MODEL, value: {{ .model | quote }} }
             {{- end }}
@@ -78,6 +81,12 @@ spec:
             {{- end }}
             {{- if .baseURL }}
             - { name: GOLIASH_AI_BASE_URL, value: {{ .baseURL | quote }} }
+            {{- end }}
+            {{- if .perHour }}
+            - { name: GOLIASH_AI_PER_HOUR, value: {{ .perHour | quote }} }
+            {{- end }}
+            {{- if .perDay }}
+            - { name: GOLIASH_AI_PER_DAY, value: {{ .perDay | quote }} }
             {{- end }}
             {{- end }}
             {{- range $k, $v := .Values.env }}
