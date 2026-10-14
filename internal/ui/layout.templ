@@ -61,7 +61,6 @@ templ menuLink(b Base, page, href, label string) {
 	<a
 		href={ templ.URL(href) }
 		class="menu-item"
-		role="menuitem"
 		if b.Page == page {
 			aria-current="page"
 		}
@@ -99,6 +98,9 @@ templ Layout(b Base) {
 		}
 		<body hx-boost="true" class={ templ.KV("kiosk", b.Kiosk) }>
 			if !b.Kiosk {
+				<!-- The keyboard's first stop, ahead of a header of a dozen links. htmx leaves a
+				     fragment-only href alone, so it jumps to the page instead of swapping it. -->
+				<a class="skip-link" href="#content">Skip to content</a>
 				<header class="top">
 					<div class="top-inner">
 						<a class="brand" href="/">
@@ -119,7 +121,7 @@ templ Layout(b Base) {
 							<span>Search</span>
 							<kbd>⌘K</kbd>
 						</button>
-						<button type="button" class="bell" data-bell aria-haspopup="true" aria-expanded="false" title="Notifications">
+						<button type="button" class="bell" data-bell aria-expanded="false" title="Notifications">
 							<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
 							<span class="sr-only">Notifications</span>
 							<span class="bell-count" data-unread hidden?={ b.Unread == 0 }>{ bellBadge(b.Unread) }</span>
@@ -148,7 +150,9 @@ templ Layout(b Base) {
 									@gear()
 									<span class="menu-label">Settings</span>
 								</summary>
-								<div class="menu-list" role="menu">
+								<!-- A disclosure, not an ARIA menu: role="menu" would promise arrow-key
+								     navigation that a <details> of plain links does not have. -->
+								<div class="menu-list">
 									@menuLink(b, "apps", "/apps", "Applications")
 									@menuLink(b, "teams", "/teams", "Teams")
 									@menuLink(b, "agents", "/agents", "Agents and targets")
@@ -168,7 +172,7 @@ templ Layout(b Base) {
 									<span class="avatar" aria-hidden="true">{ initial(b.Email) }</span>
 									<span class="menu-label who-email">{ b.Email }</span>
 								</summary>
-								<div class="menu-list" role="menu">
+								<div class="menu-list">
 									<div class="menu-head">
 										<strong>{ b.Email }</strong>
 										<span class="muted">{ b.Role }</span>
@@ -176,7 +180,7 @@ templ Layout(b Base) {
 									if !b.Demo {
 										@menuLink(b, "account", "/account", "Your account")
 										<form method="post" action="/auth/logout" hx-boost="false">
-											<button class="menu-item" type="submit" role="menuitem">Sign out</button>
+											<button class="menu-item" type="submit">Sign out</button>
 										</form>
 									}
 								</div>
@@ -185,7 +189,7 @@ templ Layout(b Base) {
 					</div>
 				</header>
 			}
-			<main>
+			<main id="content" tabindex="-1">
 				if b.Demo {
 					<div class="demo-banner" role="note">
 						<span><strong>Live demo</strong> with three weeks of example data: read-only, and the data starts over regularly.</span>
