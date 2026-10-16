@@ -518,6 +518,7 @@ type PolicyForm struct {
 	Prerelease bool
 	BaseImage  string // set by people; empty: as the image declares
 	MaxSizeMB  string // the image size budget, empty: none
+	Signer     string // who should sign its images, empty: nobody named
 }
 
 // ServiceEnv is one environment on a service page.
@@ -1296,6 +1297,7 @@ type ImageSecurity struct {
 	Delta                             int64 // against the first (production) image's size, when both are known
 	DeltaFrom                         string
 	OldBase                           string // the base it is built on an older build of, when it is
+	Signer, SignerFull                string // who signed it, short and as the certificate names it
 }
 
 // ServiceFinding is one vulnerability in the service's images.
