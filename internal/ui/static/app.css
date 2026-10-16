@@ -718,7 +718,7 @@ body.kiosk .tiles-live > .tile-legend { justify-content: center; font-size: 15px
 .tile-stack { display: grid; grid-template-columns: minmax(200px, 300px) minmax(0, 1fr); align-items: start; }
 .stack-back { position: relative; margin-top: 34px; padding: 14px 40px 14px 0; }
 /* The board behind is dimmed, its label is not (it must stay readable). */
-.stack-back > .logo-board { opacity: 0.78; transition: opacity 0.2s ease; filter: saturate(0.85); }
+.stack-back > .logo-board { opacity: 0.92; transition: opacity 0.2s ease; filter: saturate(0.85); }
 .stack-back:hover > .logo-board, .stack-back:focus-within > .logo-board { opacity: 1; filter: none; }
 .stack-back-label { display: inline-block; margin: 0 0 8px 4px; font-weight: 600; font-size: 13px; }
 .stack-back .logo-board.compact { transform: rotate(-1.5deg); transform-origin: top left; }
@@ -1253,3 +1253,20 @@ html.goli-done .goli-bell { animation: goli-ring 0.45s ease-in-out 3; }
 .facts:has(.team-set) { overflow: visible; }
 .facts:has(.team-set) > .fact:first-child { border-top-left-radius: calc(var(--radius) - 1px); border-bottom-left-radius: calc(var(--radius) - 1px); }
 .facts:has(.team-set) > .fact:last-child { border-top-right-radius: calc(var(--radius) - 1px); border-bottom-right-radius: calc(var(--radius) - 1px); }
+
+/* Touch screens: a finger needs about 28px. The links and small buttons get a taller hit
+   area from padding, given back as negative margin, so the layout stays where it was. */
+@media (pointer: coarse) {
+  :where(main :not(.segmented) > a:not(.button):not([class*="cell"]):not([class*="tile"])), .brand, button.link, .toolbar-link { padding-block: 7px; margin-block: -7px; }
+  :where(main td a:not(.button)), button.link { padding-inline: 4px; margin-inline: -4px; }
+  main summary { padding-block: 5px; }
+  main input[type="checkbox"], main input[type="radio"] { width: 20px; height: 20px; }
+}
+@media (max-width: 720px) {
+  table.cards td[data-label=""], table.cards td[colspan] { display: block; }
+  table.cards td[data-label=""]::before, table.cards td[colspan]::before { content: none; }
+  table.cards td.card-empty { display: none; }
+}
+.nav[data-more-right] { mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); }
+.nav[data-more-left] { mask-image: linear-gradient(to left, #000 calc(100% - 36px), transparent); }
+.nav[data-more-left][data-more-right] { mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent); }
