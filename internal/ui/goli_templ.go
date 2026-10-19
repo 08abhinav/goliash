@@ -12,8 +12,11 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+import "time"
+
 // goliMascot is Goli, the plushie: the gentle giant with the release bell, round glasses, one raised eyebrow
-// and a stack of containers in its arm. Parts carry classes so CSS can make it blink and ring its bell.
+// and a stack of containers in its arm. Parts carry classes so CSS can make it blink and ring its bell. It dresses
+// for the season (goliSeason).
 func goliMascot(class string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -35,7 +38,7 @@ func goliMascot(class string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		var templ_7745c5c3_Var2 = []any{"goli-art", class}
+		var templ_7745c5c3_Var2 = []any{"goli-art", class, seasonClass(goliSeason(time.Now()))}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -53,7 +56,199 @@ func goliMascot(class string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\" viewBox=\"128 64 404 534\" aria-hidden=\"true\" focusable=\"false\"><g class=\"goli-bell\"><path d=\"M320 178 Q312 145 320 118\" stroke=\"#4a55b8\" stroke-width=\"8\" fill=\"none\" stroke-linecap=\"round\"></path> <path d=\"M300 112 Q300 78 320 76 Q340 78 340 112 L346 120 L294 120 Z\" fill=\"#f2b84b\" stroke=\"#c98f27\" stroke-width=\"3\" stroke-linejoin=\"round\"></path> <circle cx=\"320\" cy=\"126\" r=\"6\" fill=\"#c98f27\"></circle> <path class=\"goli-ding\" d=\"M352 86 q8 6 4 16 M360 78 q14 10 6 28\" stroke=\"#f2b84b\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\"></path></g> <path d=\"M232 222 Q218 172 250 168 Q262 190 268 206 Z\" fill=\"#4a55b8\"></path> <path d=\"M408 222 Q422 172 390 168 Q378 190 372 206 Z\" fill=\"#4a55b8\"></path> <g class=\"goli-arm\"><ellipse cx=\"172\" cy=\"420\" rx=\"34\" ry=\"62\" transform=\"rotate(25 172 420)\" fill=\"#5f6cd6\"></ellipse></g> <path d=\"M320 172 C445 172 488 285 488 405 C488 525 425 568 320 568 C215 568 152 525 152 405 C152 285 195 172 320 172 Z\" fill=\"#6c7ae0\"></path> <path d=\"M320 182 L320 238\" stroke=\"#4a55b8\" stroke-width=\"2.5\" stroke-dasharray=\"6 5\" stroke-linecap=\"round\"></path> <ellipse cx=\"320\" cy=\"462\" rx=\"104\" ry=\"86\" fill=\"#f6ecd9\"></ellipse> <ellipse cx=\"320\" cy=\"462\" rx=\"94\" ry=\"76\" fill=\"none\" stroke=\"#d9c8a8\" stroke-width=\"2\" stroke-dasharray=\"5 5\"></ellipse> <rect x=\"266\" y=\"428\" width=\"108\" height=\"50\" rx=\"10\" fill=\"#fff\" stroke=\"#2b2d42\" stroke-width=\"3\"></rect> <path d=\"M284 453 h72\" stroke=\"#2b2d42\" stroke-width=\"6\" stroke-linecap=\"round\" opacity=\"0.8\"></path> <circle cx=\"372\" cy=\"428\" r=\"12\" fill=\"#3dbb7c\" stroke=\"#fff\" stroke-width=\"3\"></circle> <path d=\"M366 428 l4 4 l8 -8\" stroke=\"#fff\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <ellipse cx=\"258\" cy=\"566\" rx=\"58\" ry=\"26\" fill=\"#4a55b8\"></ellipse> <ellipse cx=\"382\" cy=\"566\" rx=\"58\" ry=\"26\" fill=\"#4a55b8\"></ellipse> <path d=\"M236 562 v-8 M258 560 v-10 M280 562 v-8 M360 562 v-8 M382 560 v-10 M404 562 v-8\" stroke=\"#3a4396\" stroke-width=\"3\" stroke-linecap=\"round\"></path> <g class=\"goli-eyes\"><circle cx=\"275\" cy=\"290\" r=\"34\" fill=\"#fff\"></circle> <circle cx=\"365\" cy=\"290\" r=\"34\" fill=\"#fff\"></circle> <g class=\"goli-pupils\"><circle cx=\"281\" cy=\"286\" r=\"16\" fill=\"#2b2d42\"></circle> <circle cx=\"371\" cy=\"286\" r=\"16\" fill=\"#2b2d42\"></circle> <circle cx=\"287\" cy=\"279\" r=\"5\" fill=\"#fff\"></circle> <circle cx=\"377\" cy=\"279\" r=\"5\" fill=\"#fff\"></circle></g></g> <circle cx=\"275\" cy=\"290\" r=\"41\" fill=\"none\" stroke=\"#2b2d42\" stroke-width=\"6\"></circle> <circle cx=\"365\" cy=\"290\" r=\"41\" fill=\"none\" stroke=\"#2b2d42\" stroke-width=\"6\"></circle> <path d=\"M312 284 Q320 276 328 284\" stroke=\"#2b2d42\" stroke-width=\"6\" fill=\"none\"></path> <path d=\"M250 236 Q272 228 294 236\" stroke=\"#2b2d42\" stroke-width=\"5\" fill=\"none\" stroke-linecap=\"round\"></path> <path class=\"goli-brow\" d=\"M344 226 Q368 208 390 222\" stroke=\"#2b2d42\" stroke-width=\"5\" fill=\"none\" stroke-linecap=\"round\"></path> <ellipse cx=\"236\" cy=\"346\" rx=\"18\" ry=\"10\" fill=\"#f28fa6\" opacity=\"0.7\"></ellipse> <ellipse cx=\"404\" cy=\"346\" rx=\"18\" ry=\"10\" fill=\"#f28fa6\" opacity=\"0.7\"></ellipse> <path d=\"M302 348 Q320 368 338 348\" stroke=\"#2b2d42\" stroke-width=\"5\" fill=\"none\" stroke-linecap=\"round\"></path> <path d=\"M314 357 l3 9 l3 -9\" fill=\"#fff\" stroke=\"#2b2d42\" stroke-width=\"1.5\" stroke-linejoin=\"round\"></path> <g stroke=\"#2b2d42\" stroke-width=\"3\" stroke-linejoin=\"round\"><rect x=\"452\" y=\"452\" width=\"68\" height=\"40\" rx=\"6\" fill=\"#ef8a5b\"></rect> <rect x=\"458\" y=\"412\" width=\"62\" height=\"38\" rx=\"6\" fill=\"#3dbb7c\"></rect> <rect x=\"464\" y=\"374\" width=\"54\" height=\"36\" rx=\"6\" fill=\"#f2b84b\"></rect></g> <path d=\"M466 460 v24 M478 460 v24 M490 460 v24 M502 460 v24 M472 420 v22 M484 420 v22 M496 420 v22 M508 420 v22 M476 382 v20 M488 382 v20 M500 382 v20\" stroke=\"#2b2d42\" stroke-width=\"2\" opacity=\"0.45\"></path> <ellipse cx=\"462\" cy=\"440\" rx=\"30\" ry=\"58\" transform=\"rotate(-30 462 440)\" fill=\"#5f6cd6\"></ellipse></svg>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\" viewBox=\"128 64 404 534\" aria-hidden=\"true\" focusable=\"false\"><g class=\"goli-bell\"><path d=\"M320 178 Q312 145 320 118\" stroke=\"#4a55b8\" stroke-width=\"8\" fill=\"none\" stroke-linecap=\"round\"></path> <path d=\"M300 112 Q300 78 320 76 Q340 78 340 112 L346 120 L294 120 Z\" fill=\"#f2b84b\" stroke=\"#c98f27\" stroke-width=\"3\" stroke-linejoin=\"round\"></path> <circle cx=\"320\" cy=\"126\" r=\"6\" fill=\"#c98f27\"></circle> <path class=\"goli-ding\" d=\"M352 86 q8 6 4 16 M360 78 q14 10 6 28\" stroke=\"#f2b84b\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\"></path></g> <path d=\"M232 222 Q218 172 250 168 Q262 190 268 206 Z\" fill=\"#4a55b8\"></path> <path d=\"M408 222 Q422 172 390 168 Q378 190 372 206 Z\" fill=\"#4a55b8\"></path> <g class=\"goli-arm\"><ellipse cx=\"172\" cy=\"420\" rx=\"34\" ry=\"62\" transform=\"rotate(25 172 420)\" fill=\"#5f6cd6\"></ellipse></g> <path d=\"M320 172 C445 172 488 285 488 405 C488 525 425 568 320 568 C215 568 152 525 152 405 C152 285 195 172 320 172 Z\" fill=\"#6c7ae0\"></path> <path d=\"M320 182 L320 238\" stroke=\"#4a55b8\" stroke-width=\"2.5\" stroke-dasharray=\"6 5\" stroke-linecap=\"round\"></path> <ellipse cx=\"320\" cy=\"462\" rx=\"104\" ry=\"86\" fill=\"#f6ecd9\"></ellipse> <ellipse cx=\"320\" cy=\"462\" rx=\"94\" ry=\"76\" fill=\"none\" stroke=\"#d9c8a8\" stroke-width=\"2\" stroke-dasharray=\"5 5\"></ellipse> <rect x=\"266\" y=\"428\" width=\"108\" height=\"50\" rx=\"10\" fill=\"#fff\" stroke=\"#2b2d42\" stroke-width=\"3\"></rect> <path d=\"M284 453 h72\" stroke=\"#2b2d42\" stroke-width=\"6\" stroke-linecap=\"round\" opacity=\"0.8\"></path> <circle cx=\"372\" cy=\"428\" r=\"12\" fill=\"#3dbb7c\" stroke=\"#fff\" stroke-width=\"3\"></circle> <path d=\"M366 428 l4 4 l8 -8\" stroke=\"#fff\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <ellipse cx=\"258\" cy=\"566\" rx=\"58\" ry=\"26\" fill=\"#4a55b8\"></ellipse> <ellipse cx=\"382\" cy=\"566\" rx=\"58\" ry=\"26\" fill=\"#4a55b8\"></ellipse> <path d=\"M236 562 v-8 M258 560 v-10 M280 562 v-8 M360 562 v-8 M382 560 v-10 M404 562 v-8\" stroke=\"#3a4396\" stroke-width=\"3\" stroke-linecap=\"round\"></path> <g class=\"goli-eyes\"><circle cx=\"275\" cy=\"290\" r=\"34\" fill=\"#fff\"></circle> <circle cx=\"365\" cy=\"290\" r=\"34\" fill=\"#fff\"></circle> <g class=\"goli-pupils\"><circle cx=\"281\" cy=\"286\" r=\"16\" fill=\"#2b2d42\"></circle> <circle cx=\"371\" cy=\"286\" r=\"16\" fill=\"#2b2d42\"></circle> <circle cx=\"287\" cy=\"279\" r=\"5\" fill=\"#fff\"></circle> <circle cx=\"377\" cy=\"279\" r=\"5\" fill=\"#fff\"></circle></g></g> <circle cx=\"275\" cy=\"290\" r=\"41\" fill=\"none\" stroke=\"#2b2d42\" stroke-width=\"6\"></circle> <circle cx=\"365\" cy=\"290\" r=\"41\" fill=\"none\" stroke=\"#2b2d42\" stroke-width=\"6\"></circle> <path d=\"M312 284 Q320 276 328 284\" stroke=\"#2b2d42\" stroke-width=\"6\" fill=\"none\"></path> <path d=\"M250 236 Q272 228 294 236\" stroke=\"#2b2d42\" stroke-width=\"5\" fill=\"none\" stroke-linecap=\"round\"></path> <path class=\"goli-brow\" d=\"M344 226 Q368 208 390 222\" stroke=\"#2b2d42\" stroke-width=\"5\" fill=\"none\" stroke-linecap=\"round\"></path> <ellipse cx=\"236\" cy=\"346\" rx=\"18\" ry=\"10\" fill=\"#f28fa6\" opacity=\"0.7\"></ellipse> <ellipse cx=\"404\" cy=\"346\" rx=\"18\" ry=\"10\" fill=\"#f28fa6\" opacity=\"0.7\"></ellipse> <path d=\"M302 348 Q320 368 338 348\" stroke=\"#2b2d42\" stroke-width=\"5\" fill=\"none\" stroke-linecap=\"round\"></path> <path d=\"M314 357 l3 9 l3 -9\" fill=\"#fff\" stroke=\"#2b2d42\" stroke-width=\"1.5\" stroke-linejoin=\"round\"></path> <g stroke=\"#2b2d42\" stroke-width=\"3\" stroke-linejoin=\"round\"><rect x=\"452\" y=\"452\" width=\"68\" height=\"40\" rx=\"6\" fill=\"#ef8a5b\"></rect> <rect x=\"458\" y=\"412\" width=\"62\" height=\"38\" rx=\"6\" fill=\"#3dbb7c\"></rect> <rect x=\"464\" y=\"374\" width=\"54\" height=\"36\" rx=\"6\" fill=\"#f2b84b\"></rect></g> <path d=\"M466 460 v24 M478 460 v24 M490 460 v24 M502 460 v24 M472 420 v22 M484 420 v22 M496 420 v22 M508 420 v22 M476 382 v20 M488 382 v20 M500 382 v20\" stroke=\"#2b2d42\" stroke-width=\"2\" opacity=\"0.45\"></path> <ellipse cx=\"462\" cy=\"440\" rx=\"30\" ry=\"58\" transform=\"rotate(-30 462 440)\" fill=\"#5f6cd6\"></ellipse> ")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		switch goliSeason(time.Now()) {
+		case "halloween":
+			templ_7745c5c3_Err = goliHalloween().Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		case "christmas":
+			templ_7745c5c3_Err = goliChristmas().Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		case "winter":
+			templ_7745c5c3_Err = goliWinter().Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		case "summer":
+			templ_7745c5c3_Err = goliSummer().Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</svg>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return nil
+	})
+}
+
+// goliHalloween: a witch's hat (in the bell's place, see app.css), a big carved pumpkin in the free arm (its face flickers), and bats.
+func goliHalloween() templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var4 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var4 == nil {
+			templ_7745c5c3_Var4 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<g class=\"goli-season\"><ellipse cx=\"320\" cy=\"200\" rx=\"132\" ry=\"24\" fill=\"#3b2a5c\" stroke=\"#24183b\" stroke-width=\"3\"></ellipse> <path d=\"M244 196 Q296 132 312 66 Q320 40 352 54 L344 64 Q338 120 396 196 Z\" fill=\"#3b2a5c\" stroke=\"#24183b\" stroke-width=\"3\" stroke-linejoin=\"round\"></path> <path d=\"M254 182 Q320 196 388 182 L392 196 Q320 212 250 196 Z\" fill=\"#ef8a2b\"></path> <rect x=\"306\" y=\"178\" width=\"26\" height=\"22\" rx=\"4\" fill=\"none\" stroke=\"#f2b84b\" stroke-width=\"5\"></rect> <path d=\"M194 400 q-4 -16 8 -26\" stroke=\"#4d7a2a\" stroke-width=\"8\" fill=\"none\" stroke-linecap=\"round\"></path> <ellipse cx=\"198\" cy=\"458\" rx=\"68\" ry=\"56\" fill=\"#ef8a2b\" stroke=\"#b85f12\" stroke-width=\"3\"></ellipse> <path d=\"M198 402 Q172 458 198 514 M198 402 Q224 458 198 514 M160 412 Q138 458 160 504 M236 412 Q258 458 236 504\" stroke=\"#c96a16\" stroke-width=\"3\" fill=\"none\"></path> <path class=\"goli-glow\" d=\"M164 440 l18 -16 l8 20 Z M232 440 l-18 -16 l-8 20 Z M158 470 q40 30 80 0 l-10 14 l-10 -8 l-10 10 l-10 -10 l-10 10 l-10 -10 l-10 8 Z\" fill=\"#ffe066\" stroke=\"#2b2d42\" stroke-width=\"2.5\" stroke-linejoin=\"round\"></path> <g class=\"goli-bat\" fill=\"#2b2d42\"><path d=\"M404 112 q10 -14 22 -4 q4 -8 10 0 q4 -8 10 0 q12 -10 22 4 q-14 -2 -18 10 q-6 -6 -12 0 q-6 -6 -12 0 q-4 -12 -22 -10 Z\"></path> <path d=\"M150 200 q8 -11 17 -3 q3 -6 8 0 q3 -6 8 0 q9 -8 17 3 q-11 -2 -14 8 q-5 -5 -10 0 q-5 -5 -10 0 q-3 -10 -16 -8 Z\"></path> <path d=\"M470 236 q7 -9 14 -2 q3 -5 6 0 q3 -5 6 0 q7 -7 14 2 q-9 -1 -11 6 q-4 -4 -8 0 q-4 -4 -8 0 q-2 -8 -13 -6 Z\"></path></g></g>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return nil
+	})
+}
+
+// goliChristmas: a Santa hat the bell hangs from, a string of lights, and snowflakes.
+func goliChristmas() templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var5 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var5 == nil {
+			templ_7745c5c3_Var5 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<g class=\"goli-season\"><g transform=\"translate(0 -8)\"><path d=\"M232 204 Q262 120 352 108 Q420 102 452 156 Q414 150 408 204 Z\" fill=\"#d94848\" stroke=\"#a83232\" stroke-width=\"3\" stroke-linejoin=\"round\"></path> <ellipse cx=\"320\" cy=\"204\" rx=\"100\" ry=\"22\" fill=\"#fff\" stroke=\"#e1e4ee\" stroke-width=\"3\"></ellipse> <circle cx=\"454\" cy=\"160\" r=\"20\" fill=\"#fff\" stroke=\"#e1e4ee\" stroke-width=\"3\"></circle></g> <g class=\"goli-lights\"><path d=\"M170 404 Q320 452 470 404\" stroke=\"#2f6b3a\" stroke-width=\"3\" fill=\"none\"></path> <ellipse cx=\"194\" cy=\"420\" rx=\"7\" ry=\"10\" fill=\"#f2b84b\" stroke=\"#2b2d42\" stroke-width=\"2\"></ellipse> <ellipse cx=\"236\" cy=\"429\" rx=\"7\" ry=\"10\" fill=\"#3dbb7c\" stroke=\"#2b2d42\" stroke-width=\"2\"></ellipse> <ellipse cx=\"278\" cy=\"435\" rx=\"7\" ry=\"10\" fill=\"#d94848\" stroke=\"#2b2d42\" stroke-width=\"2\"></ellipse> <ellipse cx=\"320\" cy=\"437\" rx=\"7\" ry=\"10\" fill=\"#5fa8ff\" stroke=\"#2b2d42\" stroke-width=\"2\"></ellipse> <ellipse cx=\"362\" cy=\"435\" rx=\"7\" ry=\"10\" fill=\"#f28fa6\" stroke=\"#2b2d42\" stroke-width=\"2\"></ellipse> <ellipse cx=\"404\" cy=\"429\" rx=\"7\" ry=\"10\" fill=\"#f2b84b\" stroke=\"#2b2d42\" stroke-width=\"2\"></ellipse> <ellipse cx=\"446\" cy=\"420\" rx=\"7\" ry=\"10\" fill=\"#3dbb7c\" stroke=\"#2b2d42\" stroke-width=\"2\"></ellipse></g>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = goliSnow().Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</g>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return nil
+	})
+}
+
+// goliWinter: a knitted hat with a bobble, a striped scarf, and snowflakes.
+func goliWinter() templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var6 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var6 == nil {
+			templ_7745c5c3_Var6 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "<g class=\"goli-season\"><path d=\"M222 214 Q226 148 320 144 Q414 148 418 214 Z\" fill=\"#3a8fd9\" stroke=\"#2a6cab\" stroke-width=\"3\" stroke-linejoin=\"round\"></path> <rect x=\"214\" y=\"194\" width=\"212\" height=\"30\" rx=\"14\" fill=\"#2f74b5\" stroke=\"#2a6cab\" stroke-width=\"3\"></rect> <path d=\"M236 198 v22 M256 198 v22 M276 198 v22 M296 198 v22 M316 198 v22 M336 198 v22 M356 198 v22 M376 198 v22 M396 198 v22\" stroke=\"#5fa8ff\" stroke-width=\"4\" opacity=\"0.7\"></path> <path d=\"M260 172 Q320 160 380 172\" stroke=\"#fff\" stroke-width=\"6\" fill=\"none\" opacity=\"0.8\" stroke-dasharray=\"10 8\"></path> <circle cx=\"320\" cy=\"136\" r=\"24\" fill=\"#fff\" stroke=\"#d6dbe8\" stroke-width=\"3\"></circle> <path d=\"M180 370 Q320 412 456 370 L462 404 Q320 446 176 404 Z\" fill=\"#d94848\" stroke=\"#a83232\" stroke-width=\"3\" stroke-linejoin=\"round\"></path> <path d=\"M222 384 l-4 30 M274 396 l-2 32 M330 400 l0 32 M386 394 l2 32 M434 380 l4 30\" stroke=\"#fff\" stroke-width=\"8\" opacity=\"0.9\"></path> <path d=\"M376 406 L390 500 L432 494 L416 400 Z\" fill=\"#d94848\" stroke=\"#a83232\" stroke-width=\"3\" stroke-linejoin=\"round\"></path> <path d=\"M392 500 l-2 14 M405 498 l-1 15 M418 496 l0 15 M430 494 l1 14\" stroke=\"#a83232\" stroke-width=\"3\" stroke-linecap=\"round\"></path> <path d=\"M381 436 l42 -6 M385 466 l42 -6\" stroke=\"#fff\" stroke-width=\"8\" opacity=\"0.9\"></path>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = goliSnow().Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "</g>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return nil
+	})
+}
+
+// goliSummer: a straw hat, and sunglasses over the round ones.
+func goliSummer() templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var7 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var7 == nil {
+			templ_7745c5c3_Var7 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "<g class=\"goli-season\"><ellipse cx=\"320\" cy=\"198\" rx=\"152\" ry=\"26\" fill=\"#f3d27a\" stroke=\"#c9a24a\" stroke-width=\"3\"></ellipse> <path d=\"M250 198 Q252 138 320 134 Q388 138 390 198 Z\" fill=\"#f3d27a\" stroke=\"#c9a24a\" stroke-width=\"3\" stroke-linejoin=\"round\"></path> <path d=\"M252 176 Q320 166 388 176 L390 192 Q320 182 250 192 Z\" fill=\"#d94848\"></path> <path d=\"M196 202 l6 -4 M230 210 l6 -4 M410 210 l6 -4 M444 202 l6 -4\" stroke=\"#c9a24a\" stroke-width=\"3\" stroke-linecap=\"round\"></path> <circle cx=\"275\" cy=\"290\" r=\"40\" fill=\"#2b2d42\" opacity=\"0.92\"></circle> <circle cx=\"365\" cy=\"290\" r=\"40\" fill=\"#2b2d42\" opacity=\"0.92\"></circle> <path d=\"M250 274 l20 -14 M340 274 l20 -14\" stroke=\"#fff\" stroke-width=\"6\" stroke-linecap=\"round\" opacity=\"0.65\"></path></g>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return nil
+	})
+}
+
+// goliSnow: snowflakes around Goli.
+func goliSnow() templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var8 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var8 == nil {
+			templ_7745c5c3_Var8 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<g class=\"goli-snow\" stroke=\"#7fa6e6\" stroke-width=\"4\" stroke-linecap=\"round\"><path d=\"M160 150 v34 M143 167 h34 M148 155 l24 24 M172 155 l-24 24\"></path> <path d=\"M502 240 v26 M489 253 h26 M493 244 l18 18 M511 244 l-18 18\"></path> <path d=\"M150 300 v20 M140 310 h20\"></path> <path d=\"M498 120 v18 M489 129 h18\"></path></g>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -78,12 +273,12 @@ func goliCorner() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var4 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var4 == nil {
-			templ_7745c5c3_Var4 = templ.NopComponent
+		templ_7745c5c3_Var9 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var9 == nil {
+			templ_7745c5c3_Var9 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<button type=\"button\" class=\"goli-fab\" data-goli title=\"Ask Goli\" aria-label=\"Ask Goli, the assistant\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "<button type=\"button\" class=\"goli-fab\" data-goli title=\"Ask Goli\" aria-label=\"Ask Goli, the assistant\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -91,7 +286,7 @@ func goliCorner() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</button>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "</button>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
