@@ -51,7 +51,8 @@ type UpdateItem struct {
 	Service, ServiceURL, App, Owner, Env string
 	Running, Target, TargetURL           string
 	Jump, Behind, EOL                    string
-	SecurityFix                          string // what the releases up to Target say they fix
+	SecurityFix                          string   // what the releases up to Target say they fix
+	Watched                              []string // the security watches covering the service
 	EOLPassed                            bool
 	On                                   string // the targets running Running, when others run newer versions
 	Since                                time.Time
@@ -77,6 +78,20 @@ func (s *Server) updates(w http.ResponseWriter, r *http.Request, p auth.Principa
 	acks, err := s.store.ListAcks(ctx, p.Scope)
 	if err != nil {
 		return err
+	}
+	watched := map[string][]string{} // service ID -> the security watches covering it
+	if ws, err := s.store.ListWatches(ctx, p.Scope, time.Now()); err == nil && len(ws) > 0 {
+		terms := make([]string, len(ws))
+		for i, w := range ws {
+			terms[i] = w.Term
+		}
+		if matches, err := versions.WatchMatches(ctx, s.store, p.Scope, o, terms); err == nil {
+			for term, ms := range matches {
+				for _, m := range ms {
+					watched[m.ServiceID] = append(watched[m.ServiceID], term)
+				}
+			}
+		}
 	}
 	q := r.URL.Query()
 	v := UpdatesView{Base: withFlash(s.base(ctx, p, "updates", "Updates"), r), Team: q.Get("team"), Env: q.Get("env"), Level: -1}
@@ -110,7 +125,7 @@ func (s *Server) updates(w http.ResponseWriter, r *http.Request, p auth.Principa
 			Env: u.Environment.Name, Running: u.Running, Target: u.Target, TargetURL: u.TargetURL, Jump: string(u.Jump),
 			Behind: u.Behind, EOL: u.EOL, EOLPassed: u.EOLPassed, Since: u.Since, Level: u.Urgency, On: strings.Join(u.On, ", "),
 			LevelLabel: versions.UrgencyLabels[u.Urgency], LevelClass: levelClasses[u.Urgency], Skip: nextVersion(u.Target),
-			Exploited: u.Exploited, Critical: u.Critical, Vulns: u.Vulns, SecurityFix: u.SecurityFix,
+			Exploited: u.Exploited, Critical: u.Critical, Vulns: u.Vulns, SecurityFix: u.SecurityFix, Watched: watched[u.Service.ID],
 		}
 		if p.Can(store.RoleMember) || s.demoPulls() {
 			it.PRs = s.upgradePRs(ctx, p.Scope, o, apps, u.Service.ID, u.Environment.Name, u.Running, u.Target)
