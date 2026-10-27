@@ -106,6 +106,7 @@ templ AgentPage(v AgentPageView) {
 			</section>
 			}
 		</div>
+		@sourcesPanel(v.Agent.ID, v.Sources, v.CanAdmin)
 		if len(v.Found) > 0 {
 			<section class="panel">
 				<div class="panel-head"><h2>Found here, not watched</h2>@panelInfo("what the agent found it could collect when it last started, and does not collect yet")</div>
@@ -152,9 +153,7 @@ templ AgentPage(v AgentPageView) {
 				</ul>
 			</section>
 		}
-		if v.CanAdmin {
-			<p class="panel-body"><a class="button secondary" href={ templ.URL("/agents/" + v.Agent.ID + "/aws") }>Add AWS to this agent</a> <span class="muted">ECS, Lambda, RDS, ElastiCache, EKS, OpenSearch, MSK: the IAM policy and the lines to add, for this agent.</span></p>
-		}
+
 		<section class="panel">
 			<div class="panel-head"><h2>Targets</h2>@panelInfo("what this agent collects")</div>
 			if len(v.Targets) == 0 {
@@ -287,7 +286,7 @@ templ installAgent(serverURL, token string, rotated bool) {
 			}
 			<details class="install" open>
 				<summary>Docker host</summary>
-				<pre class="mono" id="install-docker">{ "curl -fsSLO https://raw.githubusercontent.com/pipozzz/goliash/main/deploy/docker/goliash-agent.yml\nGOLIASH_SERVER_URL=" + serverURL + " GOLIASH_AGENT_TOKEN=" + token + " \\\n  docker compose -f goliash-agent.yml up -d" }</pre>
+				<pre class="mono" id="install-docker">{ "mkdir -p ~/goliash-agent && cd ~/goliash-agent\ncurl -fsSLo compose.yml https://raw.githubusercontent.com/pipozzz/goliash/main/deploy/docker/goliash-agent.yml\n(umask 077; printf '%s\\n' GOLIASH_SERVER_URL=" + serverURL + " GOLIASH_AGENT_TOKEN=" + token + " > .env)\ndocker compose up -d" }</pre>
 				<button type="button" class="secondary" data-copy="install-docker">Copy</button>
 			</details>
 			<details class="install">
