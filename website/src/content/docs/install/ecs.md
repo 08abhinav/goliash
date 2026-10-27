@@ -77,7 +77,8 @@ Container functions show their image like any service. A .zip function shows its
 ## RDS and Aurora databases
 
 With `WatchRDS=true` (CloudFormation, the default) or `watch_rds = true` (Terraform) the task role may also call
-`rds:DescribeDBInstances`, `rds:DescribeDBClusters` and `rds:DescribeDBEngineVersions`, and the agent adds the
+`rds:DescribeDBInstances`, `rds:DescribeDBClusters`, `rds:DescribeDBEngineVersions` and
+`rds:DescribePendingMaintenanceActions`, and the agent adds the
 region's databases as an `rds` target named `rds-<region>` (`GOLIASH_RDS=off` stops it). With a token, create the
 target with `{"rds":{"region":"eu-west-1"}}`.
 
@@ -95,7 +96,12 @@ service gets in the matrix, Updates, notifications and reports:
   come first.
 
 Tag a database (or cluster) `goliash.ignore=true` to leave it out, and `goliash.env=prod` to place it in an
-environment other than the target's. Pending maintenance (OS patches RDS schedules) is not read yet.
+environment other than the target's.
+
+**Patches waiting.** The maintenance RDS has pending for a database (OS patches, minor upgrades, certificate
+rotation), ElastiCache's service updates (security updates first) and OpenSearch's service software updates show
+as **patch pending** on the service page and on Updates, with what waits and when AWS applies it. The CSV and
+`GET /api/v1/updates` have them as `maintenance`.
 
 ## ElastiCache caches
 
@@ -137,19 +143,47 @@ This watches the clusters themselves; the workloads inside a cluster come from a
 
 Self-managed nodes and Fargate profiles are not read.
 
+## OpenSearch Service domains
+
+With `WatchOpenSearch=true` (CloudFormation, the default) or `watch_opensearch = true` (Terraform) the task role may
+also call `es:ListDomainNames`, `es:DescribeDomains`, `es:ListTags` and `es:ListVersions`, and the agent adds the
+region's domains as an `opensearch` target named `opensearch-<region>` (`GOLIASH_OPENSEARCH=off` stops it).
+
+Each domain is a service, its engine shown as `opensearch.amazonaws.com/opensearch:2.13`, or
+`opensearch.amazonaws.com/elasticsearch:7.10` for legacy Elasticsearch:
+
+- **The versions the service offers** are its upstream releases.
+- **End of standard support** comes from endoflife.date (`amazon-opensearch`, `amazon-elasticsearch`), after which
+  AWS charges for Extended Support.
+- **A domain outside a VPC** (public endpoint) is *exposed*.
+- **A service software update AWS has waiting** (patches, often security fixes) shows as *patch pending*.
+
+## MSK clusters
+
+With `WatchMSK=true` (CloudFormation, the default) or `watch_msk = true` (Terraform) the task role may also call
+`kafka:ListClustersV2` and `kafka:ListKafkaVersions`, and the agent adds the region's provisioned clusters as an
+`msk` target named `msk-<region>` (`GOLIASH_MSK=off` stops it). Serverless clusters have no Kafka version to keep up
+and are left out.
+
+- **Each cluster** shows its Kafka version as `kafka.amazonaws.com/kafka:3.6.0`. MSK's `3.7.x` (MSK applies the
+  patches itself) reads as 3.7, and its `.kraft` and `.tiered` variants as the Kafka version they run.
+- **The versions MSK offers**, and end of support from endoflife.date (`amazon-msk`), work as for the others.
+- **Brokers with public access** make the cluster *exposed*.
+
 ## Leaving things out
 
-- `goliash.ignore=true` as a tag on an ECS service, Lambda function, RDS database, ElastiCache cache or EKS cluster
-  keeps the agent from reporting it.
+- `goliash.ignore=true` as a tag on an ECS service, Lambda function, RDS database, ElastiCache cache, EKS cluster,
+  OpenSearch domain or MSK cluster keeps the agent from reporting it.
 - `Clusters` (`GOLIASH_ECS_CLUSTERS`) and `GOLIASH_ECS_EXCLUDE` choose the clusters.
-- `WatchLambda=false`, `WatchRDS=false`, `WatchElastiCache=false` and `WatchEKS=false` (`GOLIASH_LAMBDA`,
-  `GOLIASH_RDS`, `GOLIASH_ELASTICACHE`, `GOLIASH_EKS` set to `off`) leave out Lambda, RDS, ElastiCache or EKS.
+- `WatchLambda`, `WatchRDS`, `WatchElastiCache`, `WatchEKS`, `WatchOpenSearch` and `WatchMSK` set to `false`
+  (`GOLIASH_LAMBDA`, `GOLIASH_RDS`, `GOLIASH_ELASTICACHE`, `GOLIASH_EKS`, `GOLIASH_OPENSEARCH`, `GOLIASH_MSK` set to
+  `off`) leave that service out.
 - In Goliash, an ignore rule (Inbox → **Ignore this image**) drops what the agent still reports.
 
 ## Upgrading the stack
 
 **Agents → Update** gives the command. It fetches the template of the new version, so the task role gains what the
-new version reads (RDS, ElastiCache, EKS, Lambda function URLs), and keeps your parameters.
+new version reads (RDS, ElastiCache, EKS, OpenSearch, MSK, Lambda function URLs), and keeps your parameters.
 
 ## What the ECS collector reports
 

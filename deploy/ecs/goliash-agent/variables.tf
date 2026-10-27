@@ -67,7 +67,7 @@ variable "watch_lambda" {
 }
 
 variable "watch_rds" {
-  description = "Also watch the region's RDS and Aurora databases: lets the task role call rds:DescribeDBInstances, rds:DescribeDBClusters and rds:DescribeDBEngineVersions."
+  description = "Also watch the region's RDS and Aurora databases: lets the task role call rds:DescribeDBInstances, rds:DescribeDBClusters, rds:DescribeDBEngineVersions and rds:DescribePendingMaintenanceActions."
   type        = bool
   default     = false
 }
@@ -80,6 +80,18 @@ variable "watch_elasticache" {
 
 variable "watch_eks" {
   description = "Also watch the Kubernetes versions of the region's EKS clusters and managed node groups: lets the task role call eks:ListClusters, eks:DescribeCluster, eks:ListNodegroups, eks:DescribeNodegroup and eks:DescribeClusterVersions."
+  type        = bool
+  default     = false
+}
+
+variable "watch_opensearch" {
+  description = "Also watch the region's OpenSearch Service domains: lets the task role call es:ListDomainNames, es:DescribeDomains, es:ListTags and es:ListVersions."
+  type        = bool
+  default     = false
+}
+
+variable "watch_msk" {
+  description = "Also watch the region's MSK clusters: lets the task role call kafka:ListClustersV2 and kafka:ListKafkaVersions."
   type        = bool
   default     = false
 }
